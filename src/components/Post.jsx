@@ -1,8 +1,8 @@
-function Post(){
+function Post(props){
     return(
         <div>
-            <p>Yaria is trying out react</p>
-            <p>Did it work?</p>
+            <p>Comment:{props.body} by {props.author}</p>
+            
         </div>
     )
 }
