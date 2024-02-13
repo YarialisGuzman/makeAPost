@@ -1,7 +1,9 @@
+import classes from './Post.module.css';
 function Post(props){
     return(
-        <div>
-            <p>Comment:{props.body} by {props.author}</p>
+        <div className={classes.post}>
+            <p className={classes.text}>Comment:{props.body}</p>
+            <p className={classes.author}>By {props.author}</p>
             
         </div>
     )
