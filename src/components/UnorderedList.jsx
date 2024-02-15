@@ -17,7 +17,7 @@ function UnorderedList(){
 
  return( 
    <>
-   <NewPost bodyUpdates={bodyChangeHandler} authorUpdates={authorChangeHandler}></NewPost>
+   <NewPost onBodyUpdates={bodyChangeHandler} onAuthorUpdates={authorChangeHandler}></NewPost>
     <ul className={classes.posts}>
     <Post author={currentAuthor} body={currentBody}></Post>
     <Post author="Rory" body="Did you find the body?"/>
