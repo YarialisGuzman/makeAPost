@@ -1,7 +1,10 @@
+import { useState } from 'react';
+
 import Post from './Post';
 import classes from './UnorderedList.module.css'
 import NewPost from './NewPost';
-import { useState } from 'react';
+import Modal from './Modal';
+
 
 function UnorderedList(){
    const [currentBody, setCurrentBody]=useState('');
@@ -17,7 +20,9 @@ function UnorderedList(){
 
  return( 
    <>
+   <Modal>
    <NewPost onBodyUpdates={bodyChangeHandler} onAuthorUpdates={authorChangeHandler}></NewPost>
+   </Modal>
     <ul className={classes.posts}>
     <Post author={currentAuthor} body={currentBody}></Post>
     <Post author="Rory" body="Did you find the body?"/>
