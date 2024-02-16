@@ -6,10 +6,10 @@ import NewPost from './NewPost';
 import Modal from './Modal';
 
 
-function UnorderedList(){
+function UnorderedList({willPost, onStopPosting}){
    const [currentBody, setCurrentBody]=useState('');
    const [currentAuthor, setCurrentAuthor]=useState('');
-   const [modalIsVisible, setModalToInvisible]=useState(true);
+  
 
 
    function bodyChangeHandler(e){
@@ -20,13 +20,11 @@ function UnorderedList(){
       setCurrentAuthor(e.target.value);
    }
 
-   function modalVisibilityHandler(){
-      setModalToInvisible(false);
-   }
+ 
 
    let modalContent;
-   if(modalIsVisible){
-      modalContent= <Modal onClose={modalVisibilityHandler}>
+   if(willPost){
+      modalContent= <Modal onClose={onStopPosting}>
       <NewPost onBodyUpdates={bodyChangeHandler} onAuthorUpdates={authorChangeHandler}></NewPost>
       </Modal>
    }
