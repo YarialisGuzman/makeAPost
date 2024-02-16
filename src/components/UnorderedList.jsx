@@ -7,28 +7,35 @@ import Modal from './Modal';
 
 function UnorderedList({willPost, onStopPosting}){
    const [prevPosts, setNewPost]=useState([]);
-   function addPostEventListener(postData){
-      setNewPost((previousPosts)=>{
-         [postData, ...previousPosts]
-      })
+   function addPostHandler(postData){
+      setNewPost((previousPosts)=> [postData, ...previousPosts]
+      )
 
-      console.log(postData)
    }
   
 
    let modalContent;
    if(willPost){
       modalContent= <Modal onClose={onStopPosting}>
-      <NewPost onCancel={onStopPosting} addPost={addPostEventListener}></NewPost>
+      <NewPost onCancel={onStopPosting} addPost={addPostHandler}></NewPost>
       </Modal>
    }
 
  return( 
    <>
    {modalContent}
+   {prevPosts.length>0 && (
     <ul className={classes.posts}>
-    <Post author="Rory" body="Did you find the body?"/>
+   {prevPosts.map((post)=> <Post  key={post.body}body={post.body} author={post.author} />)}
     </ul>
+
+)}
+{prevPosts.length===0 && ( 
+   <div style={{ textAlign: 'center', color:'white'}}>
+   <h2>NO POSTS CURRENTLY</h2>
+   <p>Shouldn't you add something?</p>
+   </div>
+)}
     </>
  )
 }

@@ -23,7 +23,7 @@ function NewPost({onCancel, addPost}) {
       body:currentBody,
       author:currentAuthor
     };
-  
+    addPost(postData);
     onCancel();
   }
 
