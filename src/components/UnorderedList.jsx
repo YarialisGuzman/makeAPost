@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Post from './Post';
 import classes from './UnorderedList.module.css'
 import NewPost from './NewPost';
@@ -7,10 +7,26 @@ import Modal from './Modal';
 
 function UnorderedList({willPost, onStopPosting}){
    const [prevPosts, setNewPost]=useState([]);
+   
+   useEffect(()=>{
+      async function fetchPosts(){
+         const response= await fetch('http://localhost:8080/posts')
+         const resData= await response.json();
+         setNewPost(resData.posts);
+      }
+      fetchPosts();
+   }, [])
+   
    function addPostHandler(postData){
+      fetch('http://localhost:8080/posts', {
+         method: 'POST',
+         body: JSON.stringify(postData),
+         headers:{
+            'Content-Type':'application/json'
+         }
+      })
       setNewPost((previousPosts)=> [postData, ...previousPosts]
       )
-
    }
   
 
