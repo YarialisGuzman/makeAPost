@@ -9,6 +9,8 @@ import Modal from './Modal';
 function UnorderedList(){
    const [currentBody, setCurrentBody]=useState('');
    const [currentAuthor, setCurrentAuthor]=useState('');
+   const [modalIsVisible, setModalToInvisible]=useState(true);
+
 
    function bodyChangeHandler(e){
       setCurrentBody(e.target.value);
@@ -18,11 +20,20 @@ function UnorderedList(){
       setCurrentAuthor(e.target.value);
    }
 
+   function modalVisibilityHandler(){
+      setModalToInvisible(false);
+   }
+
+   let modalContent;
+   if(modalIsVisible){
+      modalContent= <Modal onClose={modalVisibilityHandler}>
+      <NewPost onBodyUpdates={bodyChangeHandler} onAuthorUpdates={authorChangeHandler}></NewPost>
+      </Modal>
+   }
+
  return( 
    <>
-   <Modal>
-   <NewPost onBodyUpdates={bodyChangeHandler} onAuthorUpdates={authorChangeHandler}></NewPost>
-   </Modal>
+   {modalContent}
     <ul className={classes.posts}>
     <Post author={currentAuthor} body={currentBody}></Post>
     <Post author="Rory" body="Did you find the body?"/>
