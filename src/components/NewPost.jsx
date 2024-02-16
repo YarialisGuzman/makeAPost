@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 
 
-function NewPost({onCancel}) {
+function NewPost({onCancel, addPost}) {
   const [currentBody, setCurrentBody]=useState('');
   const [currentAuthor, setCurrentAuthor]=useState('');
  
@@ -23,7 +23,7 @@ function NewPost({onCancel}) {
       body:currentBody,
       author:currentAuthor
     };
-    console.log(postData);
+  
     onCancel();
   }
 
