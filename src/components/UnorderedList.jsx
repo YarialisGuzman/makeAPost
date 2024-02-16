@@ -7,12 +7,15 @@ import Modal from './Modal';
 
 function UnorderedList({willPost, onStopPosting}){
    const [prevPosts, setNewPost]=useState([]);
+   const [isFetching, setIsFetching]=useState(false);
    
    useEffect(()=>{
       async function fetchPosts(){
+         setIsFetching(true);
          const response= await fetch('http://localhost:8080/posts')
          const resData= await response.json();
          setNewPost(resData.posts);
+         setIsFetching(false);
       }
       fetchPosts();
    }, [])
@@ -40,16 +43,23 @@ function UnorderedList({willPost, onStopPosting}){
  return( 
    <>
    {modalContent}
-   {prevPosts.length>0 && (
+   {!isFetching && prevPosts.length>0 && (
     <ul className={classes.posts}>
    {prevPosts.map((post)=> <Post  key={post.body}body={post.body} author={post.author} />)}
     </ul>
 
 )}
-{prevPosts.length===0 && ( 
+{!isFetching && prevPosts.length===0 && ( 
    <div style={{ textAlign: 'center', color:'white'}}>
    <h2>NO POSTS CURRENTLY</h2>
    <p>Shouldn't you add something?</p>
+   </div>
+
+   
+)}
+{isFetching && (
+   <div style={{textAlign:'center', color: 'white'}}>
+      <p>Loading posts...</p>
    </div>
 )}
     </>
