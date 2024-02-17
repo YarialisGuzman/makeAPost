@@ -5,9 +5,6 @@ import { useLoaderData } from 'react-router-dom';
 function UnorderedList(){
    const posts=useLoaderData();
    
-  
-
-
  return( 
    <>
    {posts.length>0 && (

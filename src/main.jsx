@@ -18,7 +18,7 @@ const router= createBrowserRouter([
       loader: loaderForPosts,
       children:[
         {path:'/create-post',action:newPostAction, element:<NewPost/>},
-              {path:'/:postId', element:<PostSpecifics/>, loader:postSpecificsLoader}
+              {path:'/postId', element:<PostSpecifics/>, loader:postSpecificsLoader}
     ]},
     
   ]}

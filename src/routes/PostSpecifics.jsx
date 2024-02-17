@@ -34,7 +34,7 @@ function PostSpecifics() {
 export default PostSpecifics;
 
 export async function loader({params}){
-    const res= await fetch('http://localhost:8080/posts'+ params.postId);
+    const res= await fetch('http://localhost:8080/posts/'+ params.postId);
     const resData= await res.json();
     return resData.post;
 }
