@@ -1,10 +1,11 @@
 import classes from './NewPost.module.css';
 import { useState } from 'react';
 import Modal from '../components/Modal';
+import { Link } from 'react-router-dom';
 
 
 
-function NewPost({onCancel, addPost}) {
+function NewPost({addPost}) {
   const [currentBody, setCurrentBody]=useState('');
   const [currentAuthor, setCurrentAuthor]=useState('');
  
@@ -41,7 +42,7 @@ function NewPost({onCancel, addPost}) {
         <input type="text" id="name" onChange={authorChangeHandler} required />
       </p>
       <p className={classes.actions}>
-      <button type="button" onClick={onCancel}>cancel</button>
+      <Link to=".." type="button">cancel</Link>
       <button type="submit">submit</button>
       </p>
     </form>
