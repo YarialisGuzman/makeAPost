@@ -12,7 +12,7 @@ function UnorderedList(){
    <>
    {posts.length>0 && (
     <ul className={classes.posts}>
-   {posts.map((post)=> <Post  key={post.body}body={post.body} author={post.author} />)}
+   {posts.map((post)=> <Post id={post.id}  key={post.id}body={post.body} author={post.author} />)}
     </ul>
 
 )}
