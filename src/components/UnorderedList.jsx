@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react';
 import Post from './Post';
 import classes from './UnorderedList.module.css'
-import NewPost from './NewPost';
-import Modal from './Modal';
 
 
-function UnorderedList({willPost, onStopPosting}){
+function UnorderedList(){
    const [prevPosts, setNewPost]=useState([]);
    const [isFetching, setIsFetching]=useState(false);
    
@@ -33,16 +31,9 @@ function UnorderedList({willPost, onStopPosting}){
    }
   
 
-   let modalContent;
-   if(willPost){
-      modalContent= <Modal onClose={onStopPosting}>
-      <NewPost onCancel={onStopPosting} addPost={addPostHandler}></NewPost>
-      </Modal>
-   }
 
  return( 
    <>
-   {modalContent}
    {!isFetching && prevPosts.length>0 && (
     <ul className={classes.posts}>
    {prevPosts.map((post)=> <Post  key={post.body}body={post.body} author={post.author} />)}
