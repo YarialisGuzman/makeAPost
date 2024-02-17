@@ -1,22 +1,9 @@
-import { useState, useEffect } from 'react';
 import Post from './Post';
 import classes from './UnorderedList.module.css'
-
+import { useLoaderData } from 'react-router-dom';
 
 function UnorderedList(){
-   const [prevPosts, setNewPost]=useState([]);
-   const [isFetching, setIsFetching]=useState(false);
-   
-   useEffect(()=>{
-      async function fetchPosts(){
-         setIsFetching(true);
-         const response= await fetch('http://localhost:8080/posts')
-         const resData= await response.json();
-         setNewPost(resData.posts);
-         setIsFetching(false);
-      }
-      fetchPosts();
-   }, [])
+   const posts=useLoaderData();
    
    function addPostHandler(postData){
       fetch('http://localhost:8080/posts', {
@@ -34,25 +21,20 @@ function UnorderedList(){
 
  return( 
    <>
-   {!isFetching && prevPosts.length>0 && (
+   {posts.length>0 && (
     <ul className={classes.posts}>
-   {prevPosts.map((post)=> <Post  key={post.body}body={post.body} author={post.author} />)}
+   {posts.map((post)=> <Post  key={post.body}body={post.body} author={post.author} />)}
     </ul>
 
 )}
-{!isFetching && prevPosts.length===0 && ( 
+{posts.length===0 && ( 
    <div style={{ textAlign: 'center', color:'white'}}>
    <h2>NO POSTS CURRENTLY</h2>
    <p>Shouldn't you add something?</p>
    </div>
-
    
 )}
-{isFetching && (
-   <div style={{textAlign:'center', color: 'white'}}>
-      <p>Loading posts...</p>
-   </div>
-)}
+
     </>
  )
 }
